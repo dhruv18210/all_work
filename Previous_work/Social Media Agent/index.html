@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Social Media Agent - AI-powered content pipeline. Enter your industry and get a full 7-stage workflow for discovering, generating, and publishing social media content." />
+  <title>Social Media Agent | AI Content Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Landing View -->
+    <div id="landing-view" class="landing-view active">
+      <div class="landing-bg"></div>
+      <div class="landing-content">
+        <div class="landing-badge">AI-Powered Pipeline</div>
+        <h1 class="landing-title">
+          Social Media <span class="gradient-text">Agent</span>
+        </h1>
+        <p class="landing-subtitle">Enter your industry or department and we'll generate a complete 7-stage social media content workflow — from discovery to publishing.</p>
+
+        <div class="landing-input-group" id="niche-input-group">
+          <div class="input-wrapper">
+            <span class="input-icon">🔍</span>
+            <input type="text" id="niche-input" class="landing-input" placeholder="Type your industry (e.g., Pharmacy, Hotel, Fitness...)" autocomplete="off" />
+          </div>
+          <button id="build-btn" class="btn-build">
+            <span>Build Workflow</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+
+        <div class="landing-presets">
+          <span class="presets-label">Quick Start:</span>
+          <div class="preset-buttons" id="preset-buttons"></div>
+        </div>
+
+        <div class="landing-features">
+          <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-title">Discover</div>
+            <div class="feature-desc">Content from news, social media & forums</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✍️</div>
+            <div class="feature-title">Generate</div>
+            <div class="feature-desc">Platform-specific posts with AI</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <div class="feature-title">Approve</div>
+            <div class="feature-desc">Human-in-the-loop review</div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📤</div>
+            <div class="feature-title">Publish</div>
+            <div class="feature-desc">Auto-post to all platforms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App View (hidden initially) -->
+    <div id="app-view" class="app-view">
+      <!-- Header -->
+      <header id="app-header">
+        <div class="header-inner">
+          <div class="logo">
+            <button id="back-btn" class="back-btn" title="Change Industry">←</button>
+            <div class="logo-icon">
+              <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="url(#g1)" stroke-width="2.5"/><path d="M10 16.5L14.5 21L22 12" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C63FF"/><stop offset="1" stop-color="#3CF0C5"/></linearGradient></defs></svg>
+            </div>
+            <h1>Social Media <span class="accent">Agent</span></h1>
+            <span class="niche-label" id="niche-label"></span>
+          </div>
+          <nav id="header-nav">
+            <button class="nav-btn active" data-view="pipeline">Pipeline</button>
+            <button class="nav-btn" data-view="dashboard">Dashboard</button>
+          </nav>
+          <div class="header-actions">
+            <button id="run-pipeline-btn" class="btn-primary">
+              <span class="btn-icon">▶</span> Run Pipeline
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main id="main-content">
+        <div id="pipeline-view" class="view active"></div>
+        <div id="dashboard-view" class="view"></div>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

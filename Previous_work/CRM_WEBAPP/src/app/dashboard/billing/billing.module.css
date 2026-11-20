@@ -1,0 +1,324 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--muted-foreground);
+}
+
+/* Usage Section */
+.usageSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.usageCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.usageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.usageInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.icon { color: var(--primary); }
+
+.usageValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.usageBar {
+  height: 8px;
+  background: var(--glass-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.usageFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.usageHint {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.usageStats {
+  display: flex;
+  gap: 2rem;
+}
+
+.miniStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.miniStat span {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.miniStat strong {
+  font-size: 1.25rem;
+  color: var(--foreground);
+}
+
+/* Plans Section */
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.planCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.planCard:hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+}
+
+.popularCard {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 20px 40px -20px rgba(99, 102, 241, 0.3);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.planName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.period {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.planDesc {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.featuresList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.featuresList li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.checkIcon {
+  color: var(--success);
+}
+
+/* Bottom Grid */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.headerLeft h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.paymentBox {
+  background: var(--background);
+  border: 1px solid var(--glass-border);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.visaIcon {
+  background: #1a1f71;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.cardInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardNumber {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.cardExpiry {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.secureIcon {
+  color: var(--success);
+}
+
+.invoiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invoiceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.invoiceItem:last-child {
+  border-bottom: none;
+}
+
+.invMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.invId {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.invDate {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.invMeta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.invAmount {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.downloadBtn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.downloadBtn:hover {
+  color: var(--primary);
+}

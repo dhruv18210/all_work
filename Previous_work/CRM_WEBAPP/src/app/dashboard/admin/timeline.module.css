@@ -1,0 +1,120 @@
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.timelineTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--foreground);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent), var(--success), var(--warning), var(--error));
+  opacity: 0.3;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.timelineItem:last-child {
+  margin-bottom: 0;
+}
+
+.timelineDot {
+  position: absolute;
+  left: -2.05rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2px solid currentColor;
+  z-index: 2;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.timelineItem:hover .timelineDot {
+  transform: scale(1.2);
+}
+
+.timelineContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  transition: background 0.2s;
+}
+
+.timelineContent:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepTitle {
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.stepDesc {
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+.statusBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Colors for steps */
+.step1 { color: #3b82f6; } /* Blue */
+.step3 { color: #84cc16; } /* Green */
+.step4 { color: #06b6d4; } /* Cyan */
+.step5 { color: #8b5cf6; } /* Purple */
+.step6 { color: #ec4899; } /* Pink */
+.step7 { color: #ef4444; } /* Red */
+.step8 { color: #f59e0b; } /* Amber */
+.step9 { color: #64748b; } /* Slate */
+.step10 { color: #eab308; } /* Yellow */

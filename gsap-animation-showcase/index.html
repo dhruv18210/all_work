@@ -1,0 +1,1941 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Lab — GSAP Animation Showcase</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP and ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #101010;
+      --panel: #191919;
+      --panel-light: #202020;
+      --text: #f4f1eb;
+      --muted: #99958d;
+      --line: rgba(255,255,255,.12);
+      --accent: #d9ff57;
+      --purple: #a58aff;
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Manrope", sans-serif;
+      overflow-x: hidden;
+      cursor: auto;
+    }
+
+    body, button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, a {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      color: #101010;
+      background: var(--accent);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    /* NAVIGATION */
+
+    .navbar {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid var(--line);
+      background: rgba(16,16,16,.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.05em;
+      font-size: 19px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      color: #101010;
+      background: var(--accent);
+      border-radius: 9px;
+      font-size: 17px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: #c0bdb6;
+      font-size: 12px;
+    }
+
+    .nav-links a {
+      transition: color .25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(217,255,87,.55);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 760px;
+      padding: 165px 0 100px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      right: -100px;
+      top: 70px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(165,138,255,.15) 0%,
+        rgba(165,138,255,.05) 36%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .15;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .eyebrow-line {
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(56px, 9.5vw, 116px);
+      line-height: .98;
+      letter-spacing: -.085em;
+      font-weight: 700;
+      max-width: 1000px;
+    }
+
+    .hero h1 .line {
+      display: block;
+      overflow: hidden;
+      padding-bottom: .06em;
+    }
+
+    .hero h1 .line span {
+      display: inline-block;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-top: 42px;
+    }
+
+    .hero-description {
+      max-width: 410px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      min-height: 48px;
+      padding: 0 21px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .25s, color .25s, border-color .25s;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #111;
+      border-color: var(--accent);
+    }
+
+    .button-primary:hover {
+      background: #e8ff99;
+      border-color: #e8ff99;
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(255,255,255,.5);
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 90px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    /* SECTION SHARED STYLES */
+
+    .section {
+      padding: 105px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 46px;
+    }
+
+    .section-number {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 5vw, 60px);
+      letter-spacing: -.07em;
+      line-height: 1.05;
+      font-weight: 600;
+    }
+
+    .section-description {
+      max-width: 300px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* CARD FLIP */
+
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .flip-card {
+      height: 360px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .flip-card:hover .flip-card-inner,
+    .flip-card:focus-within .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+
+    .flip-front {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--panel);
+    }
+
+    .flip-front::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -55px;
+      bottom: -55px;
+      background: var(--accent);
+      filter: blur(90px);
+      opacity: .12;
+      pointer-events: none;
+    }
+
+    .flip-index {
+      color: var(--muted);
+    }
+
+    .flip-symbol {
+      font-size: 70px;
+      line-height: 1;
+      color: var(--accent);
+      transform-origin: center;
+    }
+
+    .flip-front h3,
+    .flip-back h3 {
+      font-size: 27px;
+      letter-spacing: -.05em;
+      margin-bottom: 10px;
+    }
+
+    .flip-front p,
+    .flip-back p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .flip-back {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      background: var(--accent);
+      color: #101010;
+      transform: rotateY(180deg);
+    }
+
+    .flip-back p {
+      color: #343b1b;
+    }
+
+    .flip-back .mono {
+      margin-bottom: 20px;
+    }
+
+    /* TILT CARDS */
+
+    .tilt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .tilt-card {
+      position: relative;
+      min-height: 350px;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #222, #151515);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:nth-child(2) {
+      background: linear-gradient(145deg, #29243a, #17151f);
+    }
+
+    .tilt-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tilt-card .pill {
+      border: 1px solid var(--line);
+      border-radius: 50px;
+      padding: 7px 11px;
+      color: var(--muted);
+    }
+
+    .tilt-card-content {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 30px;
+      transform: translateZ(35px);
+    }
+
+    .tilt-card h3 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -.07em;
+      margin-bottom: 13px;
+    }
+
+    .tilt-card p {
+      max-width: 360px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .tilt-orb {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: 30px;
+      top: 65px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #f0ffa9, #a5c637 42%, #46551c 75%);
+      box-shadow: inset -15px -20px 35px rgba(0,0,0,.4),
+                  0 15px 70px rgba(217,255,87,.12);
+      transform: translateZ(25px);
+    }
+
+    .tilt-card:nth-child(2) .tilt-orb {
+      background: radial-gradient(circle at 35% 30%, #e6dcff, #a58aff 43%, #4e3b8b 78%);
+      box-shadow: inset -15px -20px 35px rgba(0,0,0,.4),
+                  0 15px 70px rgba(165,138,255,.15);
+    }
+
+    /* MAGNETIC BUTTON */
+
+    .magnetic-stage {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(217,255,87,.07), transparent 50%),
+        var(--panel);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+    }
+
+    .magnetic-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 27px;
+      border: 0;
+      border-radius: 100px;
+      background: var(--accent);
+      color: #101010;
+      font-weight: 800;
+      cursor: pointer;
+      will-change: transform;
+    }
+
+    .magnetic-button .arrow {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    /* SCROLL REVEALS */
+
+    .reveal-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .reveal-item {
+      min-height: 190px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .reveal-item .mono {
+      color: var(--accent);
+    }
+
+    .reveal-item h3 {
+      margin: 30px 0 10px;
+      font-size: 21px;
+      letter-spacing: -.04em;
+    }
+
+    .reveal-item p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* COUNTERS */
+
+    .extra-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .extra-card {
+      min-height: 210px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .counter-number {
+      display: block;
+      margin: 24px 0 12px;
+      color: var(--accent);
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1;
+      letter-spacing: -.08em;
+      font-weight: 700;
+    }
+
+    .extra-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* IMAGE REVEAL */
+
+    .reveal-frame {
+      position: relative;
+      height: 490px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--panel);
+      clip-path: inset(0 0 0 0 round var(--radius));
+    }
+
+    .reveal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.25);
+      clip-path: inset(0 0 0 100%);
+    }
+
+    .reveal-caption {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      z-index: 2;
+      text-shadow: 0 2px 20px rgba(0,0,0,.6);
+    }
+
+    .reveal-caption h3 {
+      font-size: clamp(25px, 4vw, 42px);
+      letter-spacing: -.06em;
+    }
+
+    .reveal-caption p {
+      max-width: 260px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #e5e5e5;
+    }
+
+    /* MARQUEE */
+
+    .marquee {
+      overflow: hidden;
+      border-block: 1px solid var(--line);
+      padding: 25px 0;
+      background: #151515;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      align-items: center;
+      gap: 28px;
+      will-change: transform;
+    }
+
+    .marquee-track span {
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 700;
+      letter-spacing: -.07em;
+      white-space: nowrap;
+    }
+
+    .marquee-track .star {
+      color: var(--accent);
+      font-size: 32px;
+    }
+
+    /* DRAGGABLE CARD */
+
+    .drag-playground {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(165,138,255,.08), transparent 45%),
+        #151515;
+      touch-action: pan-y;
+    }
+
+    .drag-playground::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .25;
+      background-image: radial-gradient(rgba(255,255,255,.25) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+
+    .drag-card {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      width: min(250px, 68%);
+      min-height: 270px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 22px;
+      background: linear-gradient(145deg, #29243a, #191621);
+      box-shadow: 0 25px 80px rgba(0,0,0,.4);
+      transform: translate(-50%, -50%);
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+      will-change: left, top, transform;
+    }
+
+    .drag-card:active {
+      cursor: grabbing;
+    }
+
+    .drag-icon {
+      font-size: 42px;
+      color: var(--purple);
+      margin: 30px 0;
+    }
+
+    .drag-card h3 {
+      font-size: 25px;
+      letter-spacing: -.05em;
+      margin-bottom: 10px;
+    }
+
+    .drag-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .drag-label {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      color: var(--muted);
+    }
+
+    /* RIPPLE BUTTON */
+
+    .ripple-stage {
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .ripple-button {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 20px 28px;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .ripple-button .ripple-label {
+      position: relative;
+      z-index: 2;
+    }
+
+    .ripple-wave {
+      position: absolute;
+      z-index: 1;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.75);
+      pointer-events: none;
+      transform: scale(0);
+    }
+
+    /* CUSTOM CURSOR */
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(217,255,87,.7);
+    }
+
+    /* FOOTER */
+
+    .footer {
+      padding: 55px 0 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      align-items: start;
+      margin-bottom: 55px;
+    }
+
+    .footer-title {
+      font-size: clamp(35px, 6vw, 65px);
+      letter-spacing: -.075em;
+      line-height: 1;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      color: var(--muted);
+    }
+
+    /* ACCESSIBILITY */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-status {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 145px 0 65px;
+      }
+
+      .hero-bottom,
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero-meta {
+        margin-top: 55px;
+      }
+
+      .flip-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .reveal-list,
+      .extra-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tilt-orb {
+        width: 150px;
+        height: 150px;
+        right: 15px;
+      }
+
+      .reveal-frame {
+        height: 380px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .nav-inner {
+        height: 66px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(48px, 15vw, 76px);
+      }
+
+      .hero-bottom {
+        margin-top: 30px;
+      }
+
+      .hero-meta {
+        margin-top: 45px;
+      }
+
+      .section {
+        padding: 75px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 30px;
+      }
+
+      .flip-grid,
+      .tilt-grid,
+      .reveal-list,
+      .extra-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flip-card {
+        height: 310px;
+      }
+
+      .tilt-card {
+        min-height: 330px;
+      }
+
+      .tilt-orb {
+        width: 130px;
+        height: 130px;
+        top: 75px;
+      }
+
+      .reveal-frame {
+        height: 360px;
+      }
+
+      .reveal-caption {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .drag-playground {
+        min-height: 390px;
+      }
+
+      .footer-top,
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Motion Lab home">
+        <span class="brand-mark">M</span>
+        <span>motion<span class="accent">lab</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#flip">3D Cards</a>
+        <a href="#scroll">Scroll FX</a>
+        <a href="#experiments">Experiments</a>
+      </div>
+
+      <div class="nav-status mono">
+        <span class="status-dot"></span>
+        GSAP playground
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-grid"></div>
+      <div class="hero-glow"></div>
+
+      <div class="container hero-content">
+        <div class="eyebrow mono hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          Creative motion experiments
+        </div>
+
+        <h1>
+          <span class="line"><span class="hero-line">Make the web</span></span>
+          <span class="line"><span class="hero-line highlight">move differently.</span></span>
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="hero-description">
+            A playground of interactive experiences, smooth transitions
+            and expressive motion — built with HTML, CSS and GSAP.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#flip">
+              Explore animations <span>↘</span>
+            </a>
+            <a class="button button-secondary" href="#experiments">
+              View experiments
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-meta mono">
+          <span>01 — 09 / Motion studies</span>
+          <span>Scroll to explore ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01: 3D CARD FLIP -->
+    <section class="section" id="flip">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">01 / 09</span>
+            <h2 class="section-title">A different<br>point of view.</h2>
+          </div>
+          <p class="section-description">
+            Hover over each card to reveal its other side.
+            Perspective and backface visibility create the 3D illusion.
+          </p>
+        </div>
+
+        <div class="flip-grid">
+          <article class="flip-card" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-face flip-front">
+                <span class="flip-index mono">CARD / 001</span>
+                <div class="flip-symbol">↗</div>
+                <div>
+                  <h3>Move forward.</h3>
+                  <p>Small interactions. Meaningful moments.</p>
+                </div>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="mono">THE PRINCIPLE</span>
+                <h3>Motion with purpose.</h3>
+                <p>Use animation to guide attention, explain change and make interfaces feel alive.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-face flip-front">
+                <span class="flip-index mono">CARD / 002</span>
+                <div class="flip-symbol">◎</div>
+                <div>
+                  <h3>Find balance.</h3>
+                  <p>Give every transition room to breathe.</p>
+                </div>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="mono">THE PRINCIPLE</span>
+                <h3>Timing is everything.</h3>
+                <p>Carefully tuned durations and easing make movement feel intentional rather than mechanical.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="flip-card" tabindex="0">
+            <div class="flip-card-inner">
+              <div class="flip-face flip-front">
+                <span class="flip-index mono">CARD / 003</span>
+                <div class="flip-symbol">✳</div>
+                <div>
+                  <h3>Stay curious.</h3>
+                  <p>Experiment beyond the expected.</p>
+                </div>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="mono">THE PRINCIPLE</span>
+                <h3>Explore the details.</h3>
+                <p>Use depth, movement and responsive feedback to give digital experiences their own character.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02: TILT -->
+    <section class="section" id="tilt">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">02 / 09</span>
+            <h2 class="section-title">Feel the depth.</h2>
+          </div>
+          <p class="section-description">
+            Move your pointer across the cards. Their rotation responds
+            to your position for a subtle 3D hover effect.
+          </p>
+        </div>
+
+        <div class="tilt-grid">
+          <article class="tilt-card">
+            <div class="tilt-card-top">
+              <span class="mono">INTERACTION / A</span>
+              <span class="pill mono">Tilt 3D</span>
+            </div>
+            <div class="tilt-orb"></div>
+            <div class="tilt-card-content">
+              <h3>Light<br>in motion.</h3>
+              <p>A little depth can turn a static surface into a tactile experience.</p>
+            </div>
+          </article>
+
+          <article class="tilt-card">
+            <div class="tilt-card-top">
+              <span class="mono">INTERACTION / B</span>
+              <span class="pill mono">Perspective</span>
+            </div>
+            <div class="tilt-orb"></div>
+            <div class="tilt-card-content">
+              <h3>Space<br>to explore.</h3>
+              <p>Responsive rotation creates the illusion of an object reacting to your presence.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: MAGNETIC BUTTON -->
+    <section class="section" id="magnetic">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">03 / 09</span>
+            <h2 class="section-title">Come a little closer.</h2>
+          </div>
+          <p class="section-description">
+            The button follows your pointer as it approaches.
+            Move away and it smoothly returns to its original position.
+          </p>
+        </div>
+
+        <div class="magnetic-stage">
+          <button class="magnetic-button" type="button">
+            <span>Follow the motion</span>
+            <span class="arrow">↗</span>
+          </button>
+          <span class="mono muted">MOVE YOUR POINTER NEAR THE BUTTON</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: SCROLL REVEALS -->
+    <section class="section" id="scroll">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">04 / 09</span>
+            <h2 class="section-title">Reveal as you scroll.</h2>
+          </div>
+          <p class="section-description">
+            Scroll down to trigger staggered entrance animations.
+            ScrollTrigger controls when the elements appear.
+          </p>
+        </div>
+
+        <div class="reveal-list">
+          <article class="reveal-item">
+            <span class="mono">01 / Observe</span>
+            <h3>Start with intent.</h3>
+            <p>Animation should support the content, not compete with it.</p>
+          </article>
+
+          <article class="reveal-item">
+            <span class="mono">02 / Compose</span>
+            <h3>Build a rhythm.</h3>
+            <p>Staggering creates a natural sequence between related elements.</p>
+          </article>
+
+          <article class="reveal-item">
+            <span class="mono">03 / Refine</span>
+            <h3>Polish the details.</h3>
+            <p>Subtle easing and consistent timing help an interface feel coherent.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: COUNTERS -->
+    <section class="section" id="counters">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">05 / 09</span>
+            <h2 class="section-title">Numbers in motion.</h2>
+          </div>
+          <p class="section-description">
+            These counters animate from zero when this section enters
+            the viewport.
+          </p>
+        </div>
+
+        <div class="extra-grid">
+          <article class="extra-card">
+            <span class="mono muted">Animation frames</span>
+            <span class="counter-number" data-count="120" data-suffix="+">0</span>
+            <p>Explore the possibilities of smooth motion and interaction.</p>
+          </article>
+
+          <article class="extra-card">
+            <span class="mono muted">Creative freedom</span>
+            <span class="counter-number" data-count="98" data-suffix="%">0</span>
+            <p>Combine timing, easing and composition to create a distinct feel.</p>
+          </article>
+
+          <article class="extra-card">
+            <span class="mono muted">Curiosity level</span>
+            <span class="counter-number" data-count="24" data-suffix="/7">0</span>
+            <p>Keep experimenting, testing and improving the little details.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06: IMAGE REVEAL -->
+    <section class="section" id="image-reveal">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">06 / 09</span>
+            <h2 class="section-title">Uncover the scene.</h2>
+          </div>
+          <p class="section-description">
+            A clipped image expands into view when you reach this section.
+            The image also settles into its final scale.
+          </p>
+        </div>
+
+        <div class="reveal-frame">
+          <img
+            class="reveal-image"
+            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=85"
+            alt="Sculptural modern architecture with geometric lines"
+            loading="lazy"
+          />
+          <div class="reveal-caption">
+            <div>
+              <span class="mono">FORM / SPACE / LIGHT</span>
+              <h3>Perspective changes everything.</h3>
+            </div>
+            <p>Look closer. A new detail appears with every change of perspective.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07: MARQUEE -->
+    <section class="section" id="marquee">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">07 / 09</span>
+            <h2 class="section-title">Keep it moving.</h2>
+          </div>
+          <p class="section-description">
+            A continuously scrolling marquee made with a GSAP tween.
+            Hover over the strip to pause it.
+          </p>
+        </div>
+      </div>
+
+      <div class="marquee" aria-label="Motion design, creative code, digital craft">
+        <div class="marquee-track">
+          <span>Motion design</span>
+          <span class="star">✳</span>
+          <span>Creative code</span>
+          <span class="star">✳</span>
+          <span>Digital craft</span>
+          <span class="star">✳</span>
+          <span>Motion design</span>
+          <span class="star">✳</span>
+          <span>Creative code</span>
+          <span class="star">✳</span>
+          <span>Digital craft</span>
+          <span class="star">✳</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08: DRAGGABLE CARD -->
+    <section class="section" id="drag">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">08 / 09</span>
+            <h2 class="section-title">Take control.</h2>
+          </div>
+          <p class="section-description">
+            Click and drag the card around the playground. Release it
+            and it settles back with a small spring-like movement.
+          </p>
+        </div>
+
+        <div class="drag-playground">
+          <article class="drag-card" tabindex="0" aria-label="Draggable interactive card">
+            <span class="mono muted">DRAG OBJECT / 001</span>
+            <div class="drag-icon">✳</div>
+            <h3>Move me around.</h3>
+            <p>Click and hold to drag. Release to return to center.</p>
+          </article>
+          <span class="drag-label mono">INTERACTIVE PLAYGROUND — DRAG THE CARD</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09: RIPPLE BUTTON -->
+    <section class="section" id="ripple">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="section-number mono">09 / 09</span>
+            <h2 class="section-title">Make a little impact.</h2>
+          </div>
+          <p class="section-description">
+            Click the button to create a ripple from the exact click
+            position. Every click creates a fresh animation.
+          </p>
+        </div>
+
+        <div class="ripple-stage">
+          <button class="ripple-button" type="button">
+            <span class="ripple-label">Click to create a ripple ↗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <span class="mono accent">END OF THE EXPERIMENT</span>
+          <h2 class="footer-title">Stay curious.<br>Keep creating.</h2>
+        </div>
+        <a class="button button-secondary" href="#home">
+          Back to top ↑
+        </a>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>Motion Lab / GSAP playground</span>
+        <span>Built for the love of motion.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Wait for the page and GSAP CDN to load before starting.
+    window.addEventListener("load", () => {
+      if (typeof gsap === "undefined") {
+        console.error("GSAP did not load. Check your internet connection or CDN URL.");
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      // Avoid animated effects when reduced motion is requested.
+      if (reduceMotion) {
+        gsap.set(".hero-line", { yPercent: 0 });
+        gsap.set(".hero-eyebrow, .hero-description, .hero-actions, .hero-meta", {
+          opacity: 1,
+          y: 0
+        });
+        gsap.set(".reveal-item", { opacity: 1, y: 0 });
+        gsap.set(".reveal-image", { clipPath: "inset(0 0 0 0)", scale: 1 });
+        gsap.set(".counter-number", {
+          innerText: (index, element) => {
+            return element.dataset.count + (element.dataset.suffix || "");
+          }
+        });
+        gsap.set(".cursor-dot, .cursor-ring", { opacity: 0 });
+        return;
+      }
+
+      // --------------------------------------------------
+      // 1. HERO ENTRANCE
+      // --------------------------------------------------
+
+      const heroTimeline = gsap.timeline({
+        defaults: { ease: "power3.out" }
+      });
+
+      heroTimeline
+        .from(".hero-eyebrow", {
+          y: 20,
+          opacity: 0,
+          duration: 0.7
+        })
+        .from(".hero-line", {
+          yPercent: 115,
+          duration: 1,
+          stagger: 0.15
+        }, "-=0.25")
+        .from(".hero-description", {
+          y: 20,
+          opacity: 0,
+          duration: 0.65
+        }, "-=0.45")
+        .from(".hero-actions .button", {
+          y: 15,
+          opacity: 0,
+          duration: 0.55,
+          stagger: 0.12
+        }, "-=0.35")
+        .from(".hero-meta", {
+          opacity: 0,
+          y: 12,
+          duration: 0.5
+        }, "-=0.2");
+
+      gsap.to(".hero-glow", {
+        scale: 1.12,
+        opacity: 0.7,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // --------------------------------------------------
+      // 2. CARD FLIP ICON MICRO-ANIMATION
+      // --------------------------------------------------
+
+      document.querySelectorAll(".flip-card").forEach((card) => {
+        const symbol = card.querySelector(".flip-symbol");
+
+        card.addEventListener("mouseenter", () => {
+          gsap.to(symbol, {
+            rotation: 12,
+            scale: 1.12,
+            duration: 0.35,
+            ease: "back.out(2)"
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(symbol, {
+            rotation: 0,
+            scale: 1,
+            duration: 0.35,
+            ease: "power2.out"
+          });
+        });
+      });
+
+      // --------------------------------------------------
+      // 3. 3D TILT CARDS
+      // --------------------------------------------------
+
+      document.querySelectorAll(".tilt-card").forEach((card) => {
+        card.addEventListener("mousemove", (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width;
+          const y = (event.clientY - rect.top) / rect.height;
+
+          const rotateY = (x - 0.5) * 12;
+          const rotateX = (0.5 - y) * 12;
+
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 800,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto"
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.5)",
+            overwrite: "auto"
+          });
+        });
+      });
+
+      // --------------------------------------------------
+      // 4. MAGNETIC BUTTON
+      // --------------------------------------------------
+
+      const magneticButton = document.querySelector(".magnetic-button");
+
+      if (magneticButton) {
+        magneticButton.addEventListener("mousemove", (event) => {
+          const rect = magneticButton.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          const moveX = (event.clientX - centerX) * 0.28;
+          const moveY = (event.clientY - centerY) * 0.28;
+
+          gsap.to(magneticButton, {
+            x: moveX,
+            y: moveY,
+            duration: 0.35,
+            ease: "power3.out",
+            overwrite: "auto"
+          });
+        });
+
+        magneticButton.addEventListener("mouseleave", () => {
+          gsap.to(magneticButton, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.45)",
+            overwrite: "auto"
+          });
+        });
+      }
+
+      // --------------------------------------------------
+      // 5. CUSTOM CURSOR
+      // --------------------------------------------------
+
+      const cursorDot = document.querySelector(".cursor-dot");
+      const cursorRing = document.querySelector(".cursor-ring");
+      const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+      if (cursorDot && cursorRing && finePointer) {
+        gsap.set([cursorDot, cursorRing], {
+          xPercent: -50,
+          yPercent: -50
+        });
+
+        window.addEventListener("mousemove", (event) => {
+          gsap.to(cursorDot, {
+            x: event.clientX,
+            y: event.clientY,
+            opacity: 1,
+            duration: 0.08,
+            overwrite: "auto"
+          });
+
+          gsap.to(cursorRing, {
+            x: event.clientX,
+            y: event.clientY,
+            opacity: 1,
+            duration: 0.22,
+            ease: "power2.out",
+            overwrite: "auto"
+          });
+        });
+
+        document.addEventListener("mouseleave", () => {
+          gsap.to([cursorDot, cursorRing], {
+            opacity: 0,
+            duration: 0.2
+          });
+        });
+
+        document.querySelectorAll("a, button, .flip-card, .drag-card").forEach((item) => {
+          item.addEventListener("mouseenter", () => {
+            gsap.to(cursorRing, {
+              scale: 1.5,
+              duration: 0.2
+            });
+          });
+
+          item.addEventListener("mouseleave", () => {
+            gsap.to(cursorRing, {
+              scale: 1,
+              duration: 0.2
+            });
+          });
+        });
+      }
+
+      // --------------------------------------------------
+      // 6. SCROLL-TRIGGERED REVEALS
+      // --------------------------------------------------
+
+      gsap.to(".reveal-item", {
+        y: 0,
+        opacity: 1,
+        duration: 0.75,
+        stagger: 0.18,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".reveal-list",
+          start: "top 82%",
+          once: true
+        }
+      });
+
+      // --------------------------------------------------
+      // 7. NUMBER COUNTERS
+      // --------------------------------------------------
+
+      document.querySelectorAll(".counter-number").forEach((element) => {
+        const target = Number(element.dataset.count) || 0;
+        const suffix = element.dataset.suffix || "";
+        const counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: target,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 88%",
+            once: true
+          },
+          onUpdate: () => {
+            element.textContent = Math.round(counter.value) + suffix;
+          }
+        });
+      });
+
+      // --------------------------------------------------
+      // 8. IMAGE CLIP REVEAL
+      // --------------------------------------------------
+
+      const revealImage = document.querySelector(".reveal-image");
+
+      if (revealImage) {
+        gsap.to(revealImage, {
+          clipPath: "inset(0 0 0 0)",
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.inOut",
+          scrollTrigger: {
+            trigger: ".reveal-frame",
+            start: "top 78%",
+            once: true
+          }
+        });
+      }
+
+      // --------------------------------------------------
+      // 9. INFINITE MARQUEE
+      // --------------------------------------------------
+
+      const marqueeTrack = document.querySelector(".marquee-track");
+      const marquee = document.querySelector(".marquee");
+
+      if (marqueeTrack && marquee) {
+        // The HTML contains two identical sets, so one half is one cycle.
+        const marqueeTween = gsap.to(marqueeTrack, {
+          xPercent: -50,
+          duration: 22,
+          ease: "none",
+          repeat: -1
+        });
+
+        marquee.addEventListener("mouseenter", () => {
+          marqueeTween.pause();
+        });
+
+        marquee.addEventListener("mouseleave", () => {
+          marqueeTween.resume();
+        });
+      }
+
+      // --------------------------------------------------
+      // 10. DRAGGABLE CARD — NO CLUB GSAP PLUGIN REQUIRED
+      // --------------------------------------------------
+
+      const playground = document.querySelector(".drag-playground");
+      const dragCard = document.querySelector(".drag-card");
+
+      if (playground && dragCard) {
+        let dragging = false;
+        let pointerId = null;
+        let startPointerX = 0;
+        let startPointerY = 0;
+        let startLeft = 0;
+        let startTop = 0;
+        let currentLeft = 0;
+        let currentTop = 0;
+
+        function getBounds() {
+          const playgroundRect = playground.getBoundingClientRect();
+          const cardRect = dragCard.getBoundingClientRect();
+
+          return {
+            maxX: Math.max(0, playground.clientWidth - cardRect.width),
+            maxY: Math.max(0, playground.clientHeight - cardRect.height)
+          };
+        }
+
+        function setCardPosition(left, top) {
+          const bounds = getBounds();
+
+          currentLeft = gsap.utils.clamp(0, bounds.maxX, left);
+          currentTop = gsap.utils.clamp(0, bounds.maxY, top);
+
+          gsap.set(dragCard, {
+            left: currentLeft,
+            top: currentTop,
+            xPercent: 0,
+            yPercent: 0
+          });
+        }
+
+        function centerCard() {
+          const left = (playground.clientWidth - dragCard.offsetWidth) / 2;
+          const top = (playground.clientHeight - dragCard.offsetHeight) / 2;
+
+          gsap.to(dragCard, {
+            left,
+            top,
+            rotation: 0,
+            duration: 0.8,
+            ease: "elastic.out(1, 0.55)",
+            overwrite: true
+          });
+
+          currentLeft = left;
+          currentTop = top;
+        }
+
+        function onPointerDown(event) {
+          if (event.button !== undefined && event.button !== 0) return;
+
+          dragging = true;
+          pointerId = event.pointerId;
+          startPointerX = event.clientX;
+          startPointerY = event.clientY;
+
+          const cardRect = dragCard.getBoundingClientRect();
+          const playgroundRect = playground.getBoundingClientRect();
+
+          startLeft = cardRect.left - playgroundRect.left;
+          startTop = cardRect.top - playgroundRect.top;
+
+          currentLeft = startLeft;
+          currentTop = startTop;
+
+          dragCard.setPointerCapture(pointerId);
+
+          gsap.killTweensOf(dragCard);
+          gsap.to(dragCard, {
+            scale: 1.04,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }
+
+        function onPointerMove(event) {
+          if (!dragging || event.pointerId !== pointerId) return;
+
+          const deltaX = event.clientX - startPointerX;
+          const deltaY = event.clientY - startPointerY;
+
+          const nextLeft = startLeft + deltaX;
+          const nextTop = startTop + deltaY;
+
+          const bounds = getBounds();
+
+          currentLeft = gsap.utils.clamp(0, bounds.maxX, nextLeft);
+          currentTop = gsap.utils.clamp(0, bounds.maxY, nextTop);
+
+          const rotation = gsap.utils.clamp(-8, 8, deltaX * 0.08);
+
+          gsap.set(dragCard, {
+            left: currentLeft,
+            top: currentTop,
+            xPercent: 0,
+            yPercent: 0,
+            rotation,
+            scale: 1.04
+          });
+        }
+
+        function onPointerUp(event) {
+          if (!dragging || (event && event.pointerId !== pointerId)) return;
+
+          dragging = false;
+          pointerId = null;
+
+          gsap.to(dragCard, {
+            scale: 1,
+            rotation: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.5)",
+            overwrite: true
+          });
+        }
+
+        dragCard.addEventListener("pointerdown", onPointerDown);
+        dragCard.addEventListener("pointermove", onPointerMove);
+        dragCard.addEventListener("pointerup", onPointerUp);
+        dragCard.addEventListener("pointercancel", onPointerUp);
+        dragCard.addEventListener("lostpointercapture", onPointerUp);
+
+        // Start centered, using absolute coordinates within the playground.
+        gsap.set(dragCard, {
+          xPercent: 0,
+          yPercent: 0,
+          left: (playground.clientWidth - dragCard.offsetWidth) / 2,
+          top: (playground.clientHeight - dragCard.offsetHeight) / 2
+        });
+
+        window.addEventListener("resize", () => {
+          if (!dragging) centerCard();
+        });
+      }
+
+      // --------------------------------------------------
+      // 11. RIPPLE BUTTON
+      // --------------------------------------------------
+
+      const rippleButton = document.querySelector(".ripple-button");
+
+      if (rippleButton) {
+        rippleButton.addEventListener("click", (event) => {
+          const rect = rippleButton.getBoundingClientRect();
+          const wave = document.createElement("span");
+
+          wave.className = "ripple-wave";
+
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+          const diameter = Math.max(rect.width, rect.height) * 2.8;
+
+          wave.style.left = x + "px";
+          wave.style.top = y + "px";
+
+          rippleButton.appendChild(wave);
+
+          gsap.fromTo(
+            wave,
+            {
+              width: 10,
+              height: 10,
+              xPercent: -50,
+              yPercent: -50,
+              scale: 0,
+              opacity: 0.9
+            },
+            {
+              width: diameter,
+              height: diameter,
+              scale: 1,
+              opacity: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              onComplete: () => wave.remove()
+            }
+          );
+
+          gsap.fromTo(
+            rippleButton,
+            { scale: 0.97 },
+            {
+              scale: 1,
+              duration: 0.35,
+              ease: "back.out(3)",
+              overwrite: true
+            }
+          );
+        });
+      }
+
+      // Refresh ScrollTrigger after fonts and lazy images settle.
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => ScrollTrigger.refresh());
+      }
+
+      window.addEventListener("load", () => ScrollTrigger.refresh());
+
+      // Refresh again if the window size changes.
+      window.addEventListener("resize", () => ScrollTrigger.refresh());
+    });
+  </script>
+</body>
+</html>

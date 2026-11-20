@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InstaScheduler — Instagram Automation Dashboard</title>
+    <meta name="description" content="Manage and monitor your Instagram post scheduling automation powered by Google Sheets and the Meta Graph API." />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+<div class="app-layout">
+
+    <!-- ════════════════════ SIDEBAR ════════════════════ -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon">📸</div>
+            <div class="logo-text">
+                <span class="name">InstaScheduler</span>
+                <span class="sub">Automation</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <span class="nav-section-label">Main</span>
+            <button class="nav-item active" data-page="dashboard" id="nav-dashboard">
+                <i data-lucide="layout-dashboard" class="nav-icon"></i>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-item" data-page="posts" id="nav-posts">
+                <i data-lucide="calendar" class="nav-icon"></i>
+                <span>Post Queue</span>
+                <span class="nav-badge" id="posts-badge">–</span>
+            </button>
+            <button class="nav-item" data-page="logs" id="nav-logs">
+                <i data-lucide="terminal" class="nav-icon"></i>
+                <span>Activity Log</span>
+            </button>
+
+            <div class="divider"></div>
+            <span class="nav-section-label">System</span>
+            <button class="nav-item" data-page="settings" id="nav-settings">
+                <i data-lucide="settings" class="nav-icon"></i>
+                <span>Settings</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="scheduler-widget">
+                <div class="scheduler-widget-title">Scheduler</div>
+                <div class="scheduler-status-row">
+                    <div class="status-indicator">
+                        <div class="status-dot" id="sched-dot"></div>
+                        <span id="sched-label">Stopped</span>
+                    </div>
+                    <label class="toggle-switch" id="scheduler-toggle-label" title="Start / Stop Scheduler">
+                        <input type="checkbox" id="scheduler-toggle" />
+                        <div class="toggle-track"></div>
+                        <div class="toggle-thumb"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ════════════════════ MAIN ════════════════════ -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="topbar-title" id="topbar-title">Dashboard</div>
+                <div class="topbar-sub" id="topbar-sub">Last refresh: –</div>
+            </div>
+            <div class="topbar-right">
+                <button class="btn btn-secondary" id="btn-refresh" title="Refresh data">
+                    <i data-lucide="refresh-cw"></i>
+                    Refresh
+                </button>
+                <button class="btn btn-primary" id="btn-run-now" title="Trigger scheduler immediately">
+                    <i data-lucide="zap"></i>
+                    Run Now
+                </button>
+            </div>
+        </header>
+
+        <!-- ─── PAGE: DASHBOARD ─────────────────────────── -->
+        <section class="page active" id="page-dashboard">
+
+            <!-- Stats Row -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon total">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="stat-total">–</div>
+                        <div class="stat-label">Total Posts</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="stat-pending">–</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon scheduled">
+                        <i data-lucide="calendar-check"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="stat-scheduled">–</div>
+                        <div class="stat-label">Scheduled</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon published">
+                        <i data-lucide="check-circle-2"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="stat-published">–</div>
+                        <div class="stat-label">Published</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon failed">
+                        <i data-lucide="x-circle"></i>
+                    </div>
+                    <div>
+                        <div class="stat-value" id="stat-failed">–</div>
+                        <div class="stat-label">Failed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Info + Mini Log Row -->
+            <div style="display:grid; grid-template-columns:1fr 2fr; gap:16px; flex:1;">
+
+                <!-- System Info Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i data-lucide="info"></i>
+                            System Info
+                        </div>
+                    </div>
+                    <div class="card-body" style="display:flex; flex-direction:column; gap:14px;">
+
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600;">Scheduler Status</span>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div class="status-dot" id="info-sched-dot"></div>
+                                <span style="font-size:14px; font-weight:600; color:var(--text-primary);" id="info-sched-label">–</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600;">Server Uptime</span>
+                            <span style="font-size:14px; font-weight:600; color:var(--text-primary);" id="info-uptime">–</span>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600;">Timezone</span>
+                            <span style="font-size:13px; font-family:'JetBrains Mono',monospace; color:var(--text-secondary);" id="info-tz">–</span>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600;">IG Account ID</span>
+                            <span style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--text-secondary); word-break:break-all;" id="info-ig-id">–</span>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                            <span style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; font-weight:600;">Sheet ID</span>
+                            <span style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-secondary); word-break:break-all;" id="info-sheet-id">–</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Mini Log -->
+                <div class="card" style="display:flex; flex-direction:column;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i data-lucide="activity"></i>
+                            Live Activity
+                        </div>
+                        <button class="btn btn-ghost" id="btn-goto-logs" style="font-size:12px; padding:4px 10px;">
+                            View All <i data-lucide="arrow-right" style="width:12px;height:12px;"></i>
+                        </button>
+                    </div>
+                    <div class="card-body" style="flex:1; padding-top:12px;">
+                        <div class="log-terminal" id="mini-log" style="height:260px;">
+                            <div class="empty-state" style="padding:20px;">
+                                <i data-lucide="terminal" style="width:28px;height:28px;opacity:0.3;"></i>
+                                <p>Waiting for activity…</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE: POST QUEUE ──────────────────────────── -->
+        <section class="page" id="page-posts">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="calendar"></i>
+                    Post Queue — Google Sheets
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <select id="filter-status" class="form-input" style="width:auto; padding:7px 12px; font-family:inherit; font-size:12px; cursor:pointer;">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="published">Published</option>
+                        <option value="failed">Failed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="card" style="flex:1;">
+                <div class="table-wrapper" id="posts-table-wrapper">
+                    <div class="empty-state" style="padding:60px;">
+                        <i data-lucide="loader" class="spinning" style="width:32px;height:32px;opacity:0.4;"></i>
+                        <p>Loading posts from Google Sheets…</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE: ACTIVITY LOG ────────────────────────── -->
+        <section class="page" id="page-logs">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="terminal"></i>
+                    Activity Log
+                </div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <label style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-secondary); cursor:pointer;">
+                        <input type="checkbox" id="log-autoscroll" checked style="accent-color: var(--accent-1);" />
+                        Auto-scroll
+                    </label>
+                    <button class="btn btn-secondary" id="btn-clear-logs" style="font-size:12px; padding:6px 12px;">
+                        <i data-lucide="trash-2"></i>
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="card" style="flex:1; display:flex; flex-direction:column;">
+                <div class="card-body" style="flex:1; padding:16px;">
+                    <div class="log-terminal" id="full-log" style="height:calc(100vh - 260px); min-height:300px;">
+                        <div class="empty-state" style="padding:20px;">
+                            <i data-lucide="terminal" style="width:28px;height:28px;opacity:0.3;"></i>
+                            <p>No activity yet. Start the scheduler or click Run Now.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PAGE: SETTINGS ────────────────────────────── -->
+        <section class="page" id="page-settings">
+            <div class="section-header">
+                <div class="section-title">
+                    <i data-lucide="settings"></i>
+                    Configuration
+                </div>
+            </div>
+
+            <!-- Instagram Settings -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i data-lucide="instagram"></i>
+                        Instagram / Meta API
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-grid">
+                        <div class="form-group full-width">
+                            <label class="form-label" for="s-ig-token">
+                                IG Access Token
+                                <span class="sensitive-tag">sensitive</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="password" class="form-input has-reveal" id="s-ig-token" autocomplete="off" placeholder="Loading…" />
+                                <button class="reveal-btn" data-target="s-ig-token" title="Show/Hide">
+                                    <i data-lucide="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="s-ig-id">IG Account ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-input" id="s-ig-id" placeholder="Loading…" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Sheets Settings -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i data-lucide="table-2"></i>
+                        Google Sheets
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-grid">
+                        <div class="form-group full-width">
+                            <label class="form-label" for="s-sheet-id">Google Sheet ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-input" id="s-sheet-id" placeholder="Loading…" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="s-google-client-id">Google Client ID</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-input" id="s-google-client-id" placeholder="Loading…" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="s-google-secret">
+                                Google Client Secret
+                                <span class="sensitive-tag">sensitive</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="password" class="form-input has-reveal" id="s-google-secret" placeholder="Loading…" />
+                                <button class="reveal-btn" data-target="s-google-secret" title="Show/Hide">
+                                    <i data-lucide="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheduler Settings -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i data-lucide="clock"></i>
+                        Scheduler
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="settings-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="s-timezone">Timezone</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-input" id="s-timezone" placeholder="e.g. Asia/Kolkata" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button class="btn btn-secondary" id="btn-reset-settings">
+                    <i data-lucide="rotate-ccw"></i>
+                    Reset
+                </button>
+                <button class="btn btn-primary" id="btn-save-settings">
+                    <i data-lucide="save"></i>
+                    Save Changes
+                </button>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+.flowContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+}
+
+.flowTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--foreground);
+}
+
+.flowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.flowItem {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.flowItem:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, var(--glass-bg), rgba(99, 102, 241, 0.05));
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stepTitle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.desc {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.featureTag {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Specific Step Colors */
+.step1 .iconWrapper { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+.step2 .iconWrapper { color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+.step3 .iconWrapper { color: #ec4899; background: rgba(236, 72, 153, 0.1); }
+.step4 .iconWrapper { color: #10b981; background: rgba(16, 185, 129, 0.1); }
+.step5 .iconWrapper { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+.step6 .iconWrapper { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+.step7 .iconWrapper { color: #06b6d4; background: rgba(6, 182, 212, 0.1); }
+.step8 .iconWrapper { color: #6366f1; background: rgba(99, 102, 241, 0.1); }
+.step9 .iconWrapper { color: #84cc16; background: rgba(132, 204, 22, 0.1); }
+.step10 .iconWrapper { color: #f97316; background: rgba(249, 115, 22, 0.1); }
+.step11 .iconWrapper { color: #eab308; background: rgba(234, 179, 8, 0.1); }
+.step12 .iconWrapper { color: #0ea5e9; background: rgba(14, 165, 233, 0.1); }

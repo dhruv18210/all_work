@@ -1,0 +1,10 @@
+property_id,locality_id,locality_name,city,zone,latitude,longitude,category,property_type,bhk,carpet_area_sqft,built_up_area_sqft,price_per_sqft,total_price,floor,total_floors,property_age,furnishing,facing,parking,ownership_type,amenities_score,listing_type,status,listed_date
+PROP01000,LOC0110,Shilaj,Ahmedabad,West,23.0559,72.4783,Residential Buy,Apartment,3,1260,1800,4500,8100000,0,9,Under Construction,Furnished,West,Yes,Freehold,7,Sale,Under Construction,2026-09-07
+PROP01001,LOC0109,Shela,Ahmedabad,West,23.0085,72.4664,Residential Buy,Apartment,2,909,1300,4615,6000000,0,14,Under Construction,Furnished,West,Yes,Freehold,8,Sale,Under Construction,2026-09-07
+PROP01002,LOC0075,Satellite,Ahmedabad,West,23.0225,72.5233,Residential Buy,Apartment,3,790,1129,13040,14722492,0,14,New (0-1 yr),Unfurnished,NA,Yes,Freehold,8,Sale,Ready to Move,2026-09-07
+PROP01003,LOC0075,Satellite,Ahmedabad,West,23.0225,72.5233,Residential Buy,Apartment,3,1697,2425,8206,19900000,0,10,New (0-1 yr),Furnished,East,Yes,Freehold,8,Sale,Ready to Move,2026-09-07
+PROP01004,LOC0075,Satellite,Ahmedabad,West,23.0225,72.5233,Residential Buy,Apartment,3,1754,2507,10969,27500000,0,20,New (0-1 yr),Unfurnished,NA,Yes,Freehold,8,Sale,Ready to Move,2026-09-07
+PROP01005,LOC0110,Shilaj,Ahmedabad,West,23.0559,72.4783,Residential Buy,Apartment,3,619,885,11401,10090597,0,22,Under Construction,Furnished,East,Yes,Freehold,7,Sale,Under Construction,2026-09-07
+PROP01006,LOC0110,Shilaj,Ahmedabad,West,23.0559,72.4783,Residential Buy,Apartment,3,1232,1760,4943,8700000,0,14,New (0-1 yr),Furnished,East,Yes,Freehold,7,Sale,Ready to Move,2026-09-07
+PROP01007,LOC0109,Shela,Ahmedabad,West,23.0085,72.4664,Residential Buy,Apartment,3,588,841,10107,8500000,0,14,Under Construction,Furnished,East,Yes,Freehold,8,Sale,Under Construction,2026-09-07
+PROP01008,LOC0109,Shela,Ahmedabad,West,23.0085,72.4664,Residential Buy,Apartment,3,1232,1760,5000,8800000,0,21,Under Construction,Furnished,East,Yes,Freehold,8,Sale,Under Construction,2026-09-07

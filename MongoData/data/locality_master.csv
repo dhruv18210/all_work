@@ -1,0 +1,128 @@
+locality_id,locality_name,city,zone,pincode,latitude,longitude
+LOC0001,Adalaj,Gandhinagar,Peripheral,382282,23.153413,72.675548
+LOC0002,Ambawadi,Ahmedabad,West,380032,22.956071,72.628153
+LOC0003,Ambli,Ahmedabad,West,380087,23.08026,72.582288
+LOC0004,Ambli Bopal Road,Ahmedabad,West,380076,23.003761,72.458551
+LOC0005,Amraiwadi,Ahmedabad,East,380028,22.958339,72.595884
+LOC0006,Ashram Road,Ahmedabad,Central,380072,22.950221,72.607372
+LOC0007,Astodia,Ahmedabad,Central,380070,23.003185,72.55921
+LOC0008,Bapunagar,Ahmedabad,East,380036,23.096763,72.45296
+LOC0009,Bhat,Gandhinagar,Peripheral,382221,23.247302,72.61134
+LOC0010,Bodakdev,Ahmedabad,West,380020,22.954175,72.634639
+LOC0011,Bopal,Ahmedabad,West,380014,22.924759,72.474612
+LOC0012,CG Road,Ahmedabad,Central,380045,23.047394,72.645111
+LOC0013,CTM,Ahmedabad,East,380094,23.012762,72.481358
+LOC0014,Chandkheda,Ahmedabad,West,380049,22.921412,72.521763
+LOC0015,Chandlodia,Ahmedabad,West,380081,23.050945,72.65821
+LOC0016,Chiloda,Gandhinagar,Peripheral,382274,23.166366,72.568029
+LOC0017,Dani Limda,Ahmedabad,East,380085,22.957196,72.520853
+LOC0018,Dariapur,Ahmedabad,Central,380011,23.107776,72.659356
+LOC0019,Ellisbridge,Ahmedabad,Central,380049,22.969214,72.603964
+LOC0020,GIFT City,Gandhinagar,Peripheral,382247,23.161625,72.613743
+LOC0021,Ghatlodia,Ahmedabad,West,380086,22.966575,72.676197
+LOC0022,Gheekanta,Ahmedabad,Central,380083,22.919637,72.603795
+LOC0023,Ghodasar,Ahmedabad,East,380069,23.07749,72.490617
+LOC0024,Ghuma,Ahmedabad,West,380049,22.967287,72.673494
+LOC0025,Gomtipur,Ahmedabad,East,380089,23.036168,72.615707
+LOC0026,Gota,Ahmedabad,West,380099,23.08874,72.506372
+LOC0027,Hathijan,Ahmedabad,East,380005,23.095711,72.54768
+LOC0028,Infocity,Gandhinagar,Peripheral,382209,23.169357,72.707766
+LOC0029,Isanpur,Ahmedabad,East,380092,22.978023,72.608705
+LOC0030,Jamalpur,Ahmedabad,Central,380051,23.114824,72.605684
+LOC0031,Jivraj Park,Ahmedabad,West,380019,22.966071,72.510591
+LOC0032,Jodhpur,Ahmedabad,West,380072,23.031855,72.630683
+LOC0033,Juhapura,Ahmedabad,West,380055,23.117977,72.547256
+LOC0034,Kalupur,Ahmedabad,Central,380029,23.141858,72.4846
+LOC0035,Kankaria,Ahmedabad,East,380064,22.924318,72.462708
+LOC0036,Kathwada,Ahmedabad,East,380015,22.939182,72.489796
+LOC0037,Khadia,Ahmedabad,Central,380088,23.003818,72.466647
+LOC0038,Khanpur,Ahmedabad,Central,380049,23.045513,72.563732
+LOC0039,Khokhra,Ahmedabad,East,380033,23.135559,72.657987
+LOC0040,Koba,Gandhinagar,Peripheral,382202,23.244445,72.575228
+LOC0041,Kolvada,Gandhinagar,Peripheral,382269,23.25574,72.679876
+LOC0042,Kudasan,Gandhinagar,Peripheral,382244,23.153448,72.626462
+LOC0043,Makarba,Ahmedabad,West,380059,22.903279,72.624702
+LOC0044,Maninagar,Ahmedabad,East,380093,22.965713,72.571541
+LOC0045,Maninagar East,Ahmedabad,East,380023,23.024344,72.476939
+LOC0046,Memnagar,Ahmedabad,West,380081,22.974127,72.604748
+LOC0047,Motera,Ahmedabad,West,380078,22.950239,72.541139
+LOC0048,Naranpura,Ahmedabad,West,380021,23.031951,72.63827
+LOC0049,Naroda,Ahmedabad,East,380068,23.122938,72.595147
+LOC0050,Naroda GIDC,Ahmedabad,East,380063,22.907174,72.674384
+LOC0051,Narol,Ahmedabad,East,380040,22.959969,72.509209
+LOC0052,Narolgam,Ahmedabad,East,380073,23.129768,72.471957
+LOC0053,Nava Naroda,Ahmedabad,East,380063,23.098346,72.686116
+LOC0054,Nava Vadaj,Ahmedabad,West,380069,23.0863,72.482214
+LOC0055,Navrangpura,Ahmedabad,West,380061,23.129744,72.49103
+LOC0056,New Ranip,Ahmedabad,West,380068,23.111884,72.552953
+LOC0057,Nikol,Ahmedabad,East,380028,23.125439,72.632664
+LOC0058,Nirnay Nagar,Ahmedabad,East,380089,22.950776,72.526212
+LOC0059,Odhav,Ahmedabad,East,380086,23.058471,72.556544
+LOC0060,Paldi,Ahmedabad,West,380067,23.010857,72.510897
+LOC0061,Panjrapole,Ahmedabad,Central,380009,22.983641,72.592594
+LOC0062,Pethapur,Gandhinagar,Peripheral,382230,23.22975,72.558051
+LOC0063,Prahlad Nagar,Ahmedabad,West,380091,23.053965,72.506346
+LOC0064,Pundhra,Gandhinagar,Peripheral,382205,23.273142,72.568237
+LOC0065,Raikhad,Ahmedabad,Central,380031,22.969335,72.567899
+LOC0066,Rakhial,Ahmedabad,East,380070,22.934255,72.675923
+LOC0067,Randesan,Gandhinagar,Peripheral,382274,23.227794,72.59578
+LOC0068,Ranip,Ahmedabad,West,380061,23.096299,72.497098
+LOC0069,Raysan,Gandhinagar,Peripheral,382213,23.241037,72.613588
+LOC0070,Sabarmati,Ahmedabad,West,380053,23.014586,72.626378
+LOC0071,Sachivalaya Area,Gandhinagar,Peripheral,382287,23.240153,72.660289
+LOC0072,Saraspur,Ahmedabad,East,380008,22.999129,72.532833
+LOC0073,Sargasan,Gandhinagar,Peripheral,382214,23.175385,72.587333
+LOC0074,Sarkhej,Ahmedabad,West,380058,22.936144,72.495437
+LOC0075,Satellite,Ahmedabad,West,380060,22.962454,72.672984
+LOC0076,Science City Road,Ahmedabad,West,380057,23.096425,72.656832
+LOC0077,"Sector 1, Gandhinagar",Gandhinagar,Sectors,382213,23.143694,72.716785
+LOC0078,"Sector 10, Gandhinagar",Gandhinagar,Sectors,382202,23.290639,72.705119
+LOC0079,"Sector 11, Gandhinagar",Gandhinagar,Sectors,382231,23.16221,72.634603
+LOC0080,"Sector 12, Gandhinagar",Gandhinagar,Sectors,382228,23.273944,72.701291
+LOC0081,"Sector 13, Gandhinagar",Gandhinagar,Sectors,382222,23.196236,72.714549
+LOC0082,"Sector 14, Gandhinagar",Gandhinagar,Sectors,382234,23.283843,72.682521
+LOC0083,"Sector 15, Gandhinagar",Gandhinagar,Sectors,382237,23.203281,72.710071
+LOC0084,"Sector 16, Gandhinagar",Gandhinagar,Sectors,382272,23.241499,72.634767
+LOC0085,"Sector 17, Gandhinagar",Gandhinagar,Sectors,382225,23.183073,72.711893
+LOC0086,"Sector 18, Gandhinagar",Gandhinagar,Sectors,382275,23.253318,72.566653
+LOC0087,"Sector 19, Gandhinagar",Gandhinagar,Sectors,382241,23.144746,72.650368
+LOC0088,"Sector 2, Gandhinagar",Gandhinagar,Sectors,382265,23.282702,72.64188
+LOC0089,"Sector 20, Gandhinagar",Gandhinagar,Sectors,382208,23.289325,72.569718
+LOC0090,"Sector 21, Gandhinagar",Gandhinagar,Sectors,382224,23.146563,72.567774
+LOC0091,"Sector 22, Gandhinagar",Gandhinagar,Sectors,382231,23.200204,72.707555
+LOC0092,"Sector 23, Gandhinagar",Gandhinagar,Sectors,382273,23.174994,72.652023
+LOC0093,"Sector 24, Gandhinagar",Gandhinagar,Sectors,382280,23.148717,72.66208
+LOC0094,"Sector 25, Gandhinagar",Gandhinagar,Sectors,382273,23.219245,72.706453
+LOC0095,"Sector 26, Gandhinagar",Gandhinagar,Sectors,382227,23.242756,72.607169
+LOC0096,"Sector 27, Gandhinagar",Gandhinagar,Sectors,382234,23.198926,72.66437
+LOC0097,"Sector 28, Gandhinagar",Gandhinagar,Sectors,382239,23.208756,72.705543
+LOC0098,"Sector 29, Gandhinagar",Gandhinagar,Sectors,382210,23.13709,72.656285
+LOC0099,"Sector 3, Gandhinagar",Gandhinagar,Sectors,382273,23.294975,72.568622
+LOC0100,"Sector 30, Gandhinagar",Gandhinagar,Sectors,382228,23.216542,72.578093
+LOC0101,"Sector 4, Gandhinagar",Gandhinagar,Sectors,382245,23.276538,72.697583
+LOC0102,"Sector 5, Gandhinagar",Gandhinagar,Sectors,382248,23.181198,72.62701
+LOC0103,"Sector 6, Gandhinagar",Gandhinagar,Sectors,382270,23.248166,72.654768
+LOC0104,"Sector 7, Gandhinagar",Gandhinagar,Sectors,382284,23.220231,72.663758
+LOC0105,"Sector 8, Gandhinagar",Gandhinagar,Sectors,382271,23.183501,72.663042
+LOC0106,"Sector 9, Gandhinagar",Gandhinagar,Sectors,382218,23.177915,72.699254
+LOC0107,Shahibaug,Ahmedabad,Central,380096,23.035274,72.516764
+LOC0108,Shahpur,Ahmedabad,Central,380078,22.953051,72.533691
+LOC0109,Shela,Ahmedabad,West,380088,23.054717,72.514756
+LOC0110,Shilaj,Ahmedabad,West,380063,22.962769,72.669358
+LOC0111,Shivranjani,Ahmedabad,West,380007,22.924652,72.553058
+LOC0112,Sindhu Bhavan Road,Ahmedabad,West,380036,22.913081,72.531454
+LOC0113,Sola,Ahmedabad,West,380017,23.055407,72.514269
+LOC0114,South Bopal,Ahmedabad,West,380095,23.008541,72.62076
+LOC0115,Thaltej,Ahmedabad,West,380072,22.904821,72.469459
+LOC0116,Tragad,Ahmedabad,West,380089,23.119443,72.582342
+LOC0117,Uvarsad,Gandhinagar,Peripheral,382248,23.228802,72.580595
+LOC0118,Vaishno Devi Circle,Ahmedabad,West,380017,22.912539,72.538916
+LOC0119,Vasan,Gandhinagar,Peripheral,382206,23.279428,72.590512
+LOC0120,Vasna,Ahmedabad,West,380032,23.062564,72.536283
+LOC0121,Vastral,Ahmedabad,East,380072,23.114692,72.548931
+LOC0122,Vastrapur,Ahmedabad,West,380080,23.082375,72.673583
+LOC0123,Vatva,Ahmedabad,East,380031,23.110005,72.685689
+LOC0124,Vavol,Gandhinagar,Peripheral,382223,23.276627,72.560866
+LOC0125,Vejalpur,Ahmedabad,West,380095,23.124377,72.639173
+LOC0126,Vinzol,Ahmedabad,East,380053,23.095036,72.658775
+LOC0127,Zundal,Ahmedabad,West,380032,22.966533,72.64037

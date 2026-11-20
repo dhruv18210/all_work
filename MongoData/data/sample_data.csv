@@ -1,0 +1,16 @@
+id,locality,city,properties,avg_price,growth
+1,Gota,Ahmedabad,8542,6512,68.45
+2,Godrej Garden City,Ahmedabad,6231,7840,61.21
+3,Vaishnodevi Circle,Ahmedabad,7542,7120,54.32
+4,SG Highway,Ahmedabad,9142,8200,48.78
+5,Bopal,Ahmedabad,5231,5950,46.31
+6,Shilaj,Ahmedabad,4892,5680,43.21
+7,South Bopal,Ahmedabad,6123,5420,41.02
+8,Ambli,Ahmedabad,3452,5100,38.12
+9,Prahlad Nagar,Ahmedabad,4210,9500,37.45
+10,Chandkheda,Ahmedabad,5120,4850,36.12
+11,Satellite,Ahmedabad,7890,10200,35.8
+12,Navrangpura,Ahmedabad,4120,11500,34.1
+13,Maninagar,Ahmedabad,3821,4500,32.45
+14,Naranpura,Ahmedabad,5430,7800,30.12
+15,Vastrapur,Ahmedabad,6780,9800,29.78

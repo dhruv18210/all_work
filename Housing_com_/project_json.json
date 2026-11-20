@@ -1,0 +1,70 @@
+{
+    "@context": "http://schema.org",
+    "@type": [
+        "ApartmentComplex",
+        "Product"
+    ],
+    "url": "https://housing.com/buy-swagat-parishram-by-swagat-group-in-satellite-ahmedabad-pid-360980",
+    "name": "Swagat Parishram",
+    "description": null,
+    "releaseDate": "Jun, 2030",
+    "image": "https://is1-3.housingcdn.com/4f2250e8/7373f49e7fcba298429bc1f0c2b7360c/v0/fs/swagat_parishram-satellite-ahmedabad-swagat_group.jpeg",
+    "geo": {
+        "@type": "GeoCoordinates",
+        "addressCountry": "India",
+        "address": "Nr. ITC Narmada, 132 Ft. Road, Shivranjani, Satellite, Near Satellite, Ahmedabad, Suryapooja Block B, Satellite, Ahmedabad, Ahmedabad District, Central Ahmedabad",
+        "latitude": "23.02706",
+        "longitude": "72.530907"
+    },
+    "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "INR",
+        "lowPrice": 16299631,
+        "highPrice": 22200335,
+        "seller": [
+            {
+                "@type": "Organization",
+                "name": "Swagat Group",
+                "url": "https://housing.com/buy-projects-by-swagat-group-bid-167804-A8mpjb91291ru5h5bfz1ikpeek",
+                "logo": "https://is1-3.housingcdn.com/aa7e7725/b44f072d07eebcb7e1a8ea1fd4dca582/v0/medium.png"
+            }
+        ],
+        "url": "https://housing.com/buy-swagat-parishram-by-swagat-group-in-satellite-ahmedabad-pid-360980"
+    },
+    "brand": [
+        {
+            "@type": "Organization",
+            "name": "Swagat Group",
+            "description": "Swagat Group is Gujarat\u2019s one of the most premier and prestigious award winning real estate developer. With its humble roots for more than 50 years, Swagat Group has emerged today a real estate developer company that builds projects that surpasses the standards of excellence. Swagat Group focuses on construction of Residential Complexes from affordable homes to high end housing, Luxurious Bungalows, Villas, and condominiums, Commercial cum Office establishment and Industrial Park. With continuous sustained growth, high customer satisfaction, and continuous innovation, the group has completed more than 75 Projects, and has already constructed more than 1 Crore sq. ft. and having a Diaspora of more than 40,000 happy smiles. It has created win \u2013 win situation for the customers who realize the quality and benefit while they enjoy a better lifestyle.",
+            "foundingDate": "1970",
+            "logo": "https://is1-3.housingcdn.com/aa7e7725/b44f072d07eebcb7e1a8ea1fd4dca582/v0/medium.png",
+            "url": "https://housing.com/buy-projects-by-swagat-group-bid-167804-A8mpjb91291ru5h5bfz1ikpeek"
+        }
+    ],
+    "address": "Nr. ITC Narmada, 132 Ft. Road, Shivranjani, Satellite, Near Satellite, Ahmedabad, Suryapooja Block B, Satellite, Ahmedabad, Ahmedabad District, Central Ahmedabad",
+    "amenityFeature": [
+        "24X7 Water Supply",
+        "Lift(s)",
+        "Internal Roads & Footpaths",
+        "Landscaping & Tree Planting",
+        "Water Conservation, Rain water Harvesting",
+        "24x7 Security",
+        "Sewage Treatment Plant",
+        "Power Backup"
+    ],
+    "containedInPlace": {
+        "name": "Suryapooja Block B",
+        "containedInPlace": {
+            "name": "Satellite",
+            "containedInPlace": {
+                "name": "Ahmedabad",
+                "containedInPlace": {
+                    "name": "Ahmedabad District",
+                    "containedInPlace": {
+                        "name": "Central Ahmedabad"
+                    }
+                }
+            }
+        }
+    }
+}

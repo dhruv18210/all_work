@@ -1,0 +1,299 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-bottom: 5rem;
+}
+
+.wizardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerInfo h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.headerInfo p {
+  color: var(--muted-foreground);
+}
+
+/* Progress Bar */
+.progressWrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  position: relative;
+  flex: 1;
+}
+
+.stepIcon {
+  width: 56px;
+  height: 56px;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.stepDesc {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.connector {
+  position: absolute;
+  top: 28px;
+  left: calc(50% + 28px);
+  right: calc(-50% + 28px);
+  height: 2px;
+  background: var(--card-border);
+  z-index: -1;
+}
+
+/* Step States */
+.stepActive .stepIcon {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 20px -5px var(--primary-glow);
+  transform: scale(1.1);
+}
+
+.stepActive .stepDesc {
+  color: white;
+}
+
+.stepCompleted .stepIcon {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.stepCompleted .connector {
+  background: var(--primary);
+}
+
+/* Wizard Content */
+.wizardContent {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  min-height: 400px;
+}
+
+.stepContent h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stepContent p {
+  color: var(--muted-foreground);
+  margin-bottom: 2.5rem;
+}
+
+/* Agent Grid */
+.agentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.agentCard {
+  background: var(--background);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.agentCard:hover {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.selected {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.agentIcon { color: var(--primary); }
+
+.agentMeta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--primary);
+}
+
+.addAgentCard {
+  border: 2px dashed var(--card-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* Upload Styles */
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.uploadBox {
+  border: 2px dashed var(--primary);
+  background: rgba(99, 102, 241, 0.02);
+  border-radius: var(--radius-lg);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.uploadIcon { color: var(--primary); opacity: 0.6; }
+
+.uploadManual {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.uploadManual p { font-size: 0.75rem; color: var(--muted); }
+
+/* Settings Form */
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 500px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.formGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.range {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.select {
+  background: var(--background);
+  border: 1px solid var(--glass-border);
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  color: white;
+  outline: none;
+}
+
+/* Launch Styles */
+.launchReview {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.launchIcon {
+  color: var(--success);
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+}
+
+.summaryBox {
+  background: var(--background);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9375rem;
+}
+
+.summaryItem span { color: var(--muted); }
+
+/* Footer */
+.wizardFooter {
+  display: flex;
+  justify-content: space-between;
+  background: var(--card-bg);
+  padding: 1.5rem 3rem;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+}
+
+.launchBtn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.4);
+}
